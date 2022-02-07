@@ -1,12 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerSami : MonoBehaviour
 {
-   public Rigidbody myRigidbody;
+       public Rigidbody myRigidbody;
        public float moveSpeed = 5f;
        public float jumpForce = 500f;
+
+       [SerializeField] private Transform groundCheck;
+       [SerializeField] private LayerMask ground;
+      
    
        private void Update()
        {
@@ -24,7 +29,14 @@ public class PlayerControllerSami : MonoBehaviour
    
            //Apply jump force
            //Preferably interact with physics in FixedUpdate() 
-           if (jumpInput)
+           if (jumpInput && IsGrounden())
                myRigidbody.AddForce(Vector3.up * jumpForce);
        }
+
+       bool IsGrounden()
+       {
+           return Physics.CheckSphere(groundCheck.position, .1f, ground);
+       }
+
+     
 }
