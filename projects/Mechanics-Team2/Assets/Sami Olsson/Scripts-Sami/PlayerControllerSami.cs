@@ -11,7 +11,7 @@ public class PlayerControllerSami : MonoBehaviour
 
        [SerializeField] private Transform groundCheck;
        [SerializeField] private LayerMask ground;
-      
+       
    
        private void Update()
        {
@@ -29,11 +29,11 @@ public class PlayerControllerSami : MonoBehaviour
    
            //Apply jump force
            //Preferably interact with physics in FixedUpdate() 
-           if (jumpInput && IsGrounden())
+           if (jumpInput && IsGrounded())
                myRigidbody.AddForce(Vector3.up * jumpForce);
        }
 
-       bool IsGrounden()
+       bool IsGrounded()
        {
            return Physics.CheckSphere(groundCheck.position, .1f, ground);
        }
