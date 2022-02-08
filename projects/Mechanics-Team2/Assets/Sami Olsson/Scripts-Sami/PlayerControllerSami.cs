@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerControllerSami : MonoBehaviour
 {
@@ -11,10 +14,24 @@ public class PlayerControllerSami : MonoBehaviour
 
        [SerializeField] private Transform groundCheck;
        [SerializeField] private LayerMask ground;
+
+       [Header("Dashing")]
        
-   
+       [SerializeField] private float dashingVelocity = 14f;
+       [SerializeField] private float dashingTime = 0.5f;
+       private Vector2 dashingDir;
+       private bool isDashing;
+       private bool canDash = true;
+       
+       
+        
+
+
+
        private void Update()
-       {
+       { 
+           
+           
            //Get move input
            //Preferably get input in Update()
            var moveInput = Input.GetAxis("Horizontal");
@@ -31,6 +48,39 @@ public class PlayerControllerSami : MonoBehaviour
            //Preferably interact with physics in FixedUpdate() 
            if (jumpInput && IsGrounded())
                myRigidbody.AddForce(Vector3.up * jumpForce);
+
+           var dashInput = Input.GetButtonDown("Dash");
+
+           if (dashInput && canDash)
+           {
+               isDashing = true;
+               canDash = false;
+               dashingDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+               if (dashingDir == Vector2.zero)
+               {
+                   dashingDir = new Vector2(transform.localScale.x, 0);
+               }
+
+               StartCoroutine(StopDashing());
+           }
+
+           if (isDashing)
+           {
+               myRigidbody.velocity = dashingDir.normalized * dashingVelocity;
+               return;
+           }
+
+           if (IsGrounded())
+           {
+               canDash = true;
+           }
+       }
+
+
+       private IEnumerator StopDashing()
+       {
+           yield return new WaitForSeconds(dashingTime);
+           isDashing = false;
        }
 
        bool IsGrounded()
