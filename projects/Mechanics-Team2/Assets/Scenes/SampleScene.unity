@@ -213,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171568517}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 9.048, y: 0, z: 0}
   m_LocalScale: {x: 23.74, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -310,7 +310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350286295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.95, y: 0, z: 0}
+  m_LocalPosition: {x: 40.53, y: 0, z: 0}
   m_LocalScale: {x: 23.74, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -395,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0.011690412, y: -0.0054027736, z: -0.00006314786, w: -0.99991715}
-  m_LocalPosition: {x: -8.942822, y: 1.116, z: -22.873453}
+  m_LocalPosition: {x: 0.048177697, y: 1.116, z: -22.873453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -732,6 +732,7 @@ GameObject:
   - component: {fileID: 1813921269}
   - component: {fileID: 1813921270}
   - component: {fileID: 1813921271}
+  - component: {fileID: 1813921272}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -811,7 +812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813921264}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -8.991, y: 1.116, z: 0}
+  m_LocalPosition: {x: 0, y: 1.116, z: 0}
   m_LocalScale: {x: 0.60225, y: 0.60225, z: 0.60225}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -839,8 +840,6 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 8
-  dashingVelocity: 14
-  dashingTime: 0.5
 --- !u!54 &1813921270
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -867,5 +866,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9af23cf0709b2274b96007adb750e58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 703869149}
+  ground:
+    serializedVersion: 2
+    m_Bits: 8
+  myRigidbody: {fileID: 1813921270}
+  dashingVelocity: 10
+  dashingTime: 0.5
+--- !u!114 &1813921272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813921264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7009d85c84472bd4399c9d72690a87a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
