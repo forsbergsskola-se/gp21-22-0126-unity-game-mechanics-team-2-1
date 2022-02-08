@@ -49,8 +49,10 @@ public class PlayerControllerSami : MonoBehaviour
            if (jumpInput && IsGrounded())
                myRigidbody.AddForce(Vector3.up * jumpForce);
 
+           //Get Move input for dash
            var dashInput = Input.GetButtonDown("Dash");
 
+          //Dash mechanic 
            if (dashInput && canDash)
            {
                isDashing = true;
