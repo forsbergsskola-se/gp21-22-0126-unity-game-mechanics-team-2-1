@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public interface IFly {
-    void Flying(bool isFlying);
+    void Flying(bool flying);
 }
 
 public class FlyLaunchEK : MonoBehaviour, IGrounded {
@@ -33,13 +33,15 @@ public class FlyLaunchEK : MonoBehaviour, IGrounded {
     }
 
     void Launch() {
-        if (Input.GetKeyDown(KeyCode.E)) {
-            FlightMode();
+        if (Input.GetKeyDown(KeyCode.E) && !isFlying) {
+            FlightMode(false);
+        } else if (Input.GetKeyDown(KeyCode.E)) {
+            FlightMode(true);
         }
     }
 
-    void FlightMode() {
-        if (!isFlying) {
+    void FlightMode(bool isGrounded) {
+        if (!isGrounded) {
             rigidBody.useGravity = false;
             isFlying = true;
         } else {
@@ -48,9 +50,7 @@ public class FlyLaunchEK : MonoBehaviour, IGrounded {
         }
     }
 
-    public void Grounded(bool isGrounded) {
-        if (isGrounded) {
-            isFlying = false;
-        }
+    public void Grounded(bool grounded) {
+        FlightMode(grounded);
     }
 }

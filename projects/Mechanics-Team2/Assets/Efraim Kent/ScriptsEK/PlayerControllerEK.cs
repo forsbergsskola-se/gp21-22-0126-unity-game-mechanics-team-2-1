@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public interface IGrounded {
-    void Grounded(bool isGrounded);
+    void Grounded(bool grounded);
 }
 
 public class PlayerControllerEK : MonoBehaviour, IFly {
@@ -25,7 +25,8 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
         //Get move input
         var moveInput = Input.GetAxis("Horizontal");
 
-        var velocity = rigidBody.velocity; //avoid repeat direct access to vector
+        //avoid repeat direct access to vector
+        var velocity = rigidBody.velocity;
 
         //Set run velocity
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D)) {
@@ -59,9 +60,9 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
         return Physics.CheckSphere(groundCheck.position, .1f, ground);
     }
 
-    public void Flying(bool isFlying) {
-        if (isFlying) {
-            jumpVelocity = 0;
+    public void Flying(bool flying) {
+        if (!flying) {
+            IsGrounded();
         }
     }
 }
