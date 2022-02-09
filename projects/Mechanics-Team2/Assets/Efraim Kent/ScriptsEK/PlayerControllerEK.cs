@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public class PlayerControllerEK : MonoBehaviour {
+public interface IGrounded {
+    void Grounded(bool isGrounded);
+}
+
+public class PlayerControllerEK : MonoBehaviour, IFly {
 
     [SerializeField] float moveSpeed = 5f, runSpeed = 10f, fallMultiplier = 2.5f, lowJumpMultiplier = 2f;
     [SerializeField, Range(1, 10)] float jumpVelocity = 6;
@@ -12,7 +16,7 @@ public class PlayerControllerEK : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    void Update() {
+    void LateUpdate() {
         Move();
         Jump();
     }
@@ -20,11 +24,12 @@ public class PlayerControllerEK : MonoBehaviour {
     void Move() {
         //Get move input
         var moveInput = Input.GetAxis("Horizontal");
+        //var moveInputY = Input.GetAxis("Vertical");
         //Preferably get input in Update()
 
         //Set run velocity
         var velocity = rigidBody.velocity; //avoid direct repeat access to vector
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.S)) {
             velocity = new Vector3(moveInput * runSpeed, velocity.y, 0);
         } else {
             //Set walk velocity
@@ -56,5 +61,11 @@ public class PlayerControllerEK : MonoBehaviour {
 
     bool IsGrounded() {
         return Physics.CheckSphere(groundCheck.position, .1f, ground);
+    }
+
+    public void Flying(bool isFlying) {
+        if (isFlying) {
+            jumpVelocity = 0;
+        }
     }
 }
