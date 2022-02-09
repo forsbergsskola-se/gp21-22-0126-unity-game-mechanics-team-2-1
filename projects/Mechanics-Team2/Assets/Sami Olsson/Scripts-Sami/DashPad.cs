@@ -8,6 +8,7 @@ public class DashPad : MonoBehaviour
     private PlayerControllerSami _playerControllerSami;
     private float currentMoveSpeed;
     
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,7 @@ public class DashPad : MonoBehaviour
         switch (hit.gameObject.tag)
         {
             case "DashBoost":
-                _playerControllerSami.moveSpeed = 25f;
+                _playerControllerSami.moveSpeed = 15f;
                 break;
            case "Ground":
                 _playerControllerSami.moveSpeed = currentMoveSpeed; 
