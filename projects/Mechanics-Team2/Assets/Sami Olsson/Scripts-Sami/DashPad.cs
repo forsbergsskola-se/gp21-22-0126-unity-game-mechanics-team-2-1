@@ -24,7 +24,7 @@ public class DashPad : MonoBehaviour
         switch (hit.gameObject.tag)
         {
             case "DashBoost":
-                _playerControllerSami.moveSpeed = 15f;
+                _playerControllerSami.moveSpeed = 20f;
                 break;
            case "Ground":
                 _playerControllerSami.moveSpeed = currentMoveSpeed; 
