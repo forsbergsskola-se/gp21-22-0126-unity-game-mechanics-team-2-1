@@ -8,7 +8,7 @@ the ground  for it to be used again.
 
 Dash Pad
 This is simple pad placed on the ground that will boost the players movement speed and give them a slight push up in the air. 
-Once you hit the ground the speed of the player will reset.
+Once you hit the ground the speed of the player will reset to default.
 
 
 
