@@ -4,9 +4,9 @@ public interface IFly {
     void Flying(bool flying);
 }
 
-public class FlyLaunchEK : MonoBehaviour, IGrounded {
+public class FlyLaunchEK : MonoBehaviour, IGrounded, IFly {
 
-    [SerializeField] float flightSpeed = 20f, dropSpeed = 10f;
+    [SerializeField] float flightSpeed = 20f, dropSpeed = 10f, maxSpeed = 30f;
 
     GameObject player;
     Rigidbody rigidBody;
@@ -21,8 +21,13 @@ public class FlyLaunchEK : MonoBehaviour, IGrounded {
     void LateUpdate() {
         Launch();
 
-        if (!isFlying) return;
+        FlightAcceleration();
+    }
 
+    void FlightAcceleration() {
+        var currentVelocity = rigidBody.velocity.magnitude;
+
+        if (!isFlying && currentVelocity < maxSpeed) return;
         if (Input.GetKey(KeyCode.W)) {
             rigidBody.AddForce(Vector3.up * flightSpeed);
         }
@@ -52,5 +57,9 @@ public class FlyLaunchEK : MonoBehaviour, IGrounded {
 
     public void Grounded(bool grounded) {
         FlightMode(grounded);
+    }
+
+    public void Flying(bool flying) {
+
     }
 }
