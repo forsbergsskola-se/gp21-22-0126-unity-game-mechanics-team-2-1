@@ -6,9 +6,11 @@ public interface IFly {
 
 public class FlyLaunchEK : MonoBehaviour, IGrounded {
 
-    [SerializeField] float flightSpeed = 5f, dropSpeed = 2.5f;
+    [SerializeField] float flightSpeed = 20f, dropSpeed = 10f;
+
     GameObject player;
     Rigidbody rigidBody;
+
     bool isFlying;
 
     void Awake() {
@@ -18,9 +20,16 @@ public class FlyLaunchEK : MonoBehaviour, IGrounded {
 
     void LateUpdate() {
         Launch();
+
         if (!isFlying) return;
-        if (Input.GetKey(KeyCode.W)) { rigidBody.AddForce(Vector3.up * flightSpeed, ForceMode.Acceleration); }
-        if (Input.GetKey(KeyCode.S)) { rigidBody.AddForce(Vector3.down * dropSpeed); }
+
+        if (Input.GetKey(KeyCode.W)) {
+            rigidBody.AddForce(Vector3.up * flightSpeed);
+        }
+
+        if (Input.GetKey(KeyCode.S)) {
+            rigidBody.AddForce(Vector3.down * dropSpeed);
+        }
     }
 
     void Launch() {

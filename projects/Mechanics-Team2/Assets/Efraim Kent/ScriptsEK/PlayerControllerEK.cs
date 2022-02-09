@@ -24,31 +24,27 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
     void Move() {
         //Get move input
         var moveInput = Input.GetAxis("Horizontal");
-        //var moveInputY = Input.GetAxis("Vertical");
-        //Preferably get input in Update()
+
+        var velocity = rigidBody.velocity; //avoid repeat direct access to vector
 
         //Set run velocity
-        var velocity = rigidBody.velocity; //avoid direct repeat access to vector
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.S)) {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D)) {
             velocity = new Vector3(moveInput * runSpeed, velocity.y, 0);
         } else {
             //Set walk velocity
             velocity = new Vector3(moveInput * moveSpeed, velocity.y, 0);
         }
         rigidBody.velocity = velocity;
-        //Preferably interact with physics in FixedUpdate()
     }
 
     void Jump() {
             //Get jump input
             var jumpInput = Input.GetKeyDown(KeyCode.Space);
-            //Preferably in Update()
 
             //Apply jump velocity
             if (jumpInput && IsGrounded()) {
                 rigidBody.velocity = Vector3.up * jumpVelocity;
             }
-            //Preferably interact with physics in FixedUpdate()
 
             //apply fallMultiplier to gravity
             if (rigidBody.velocity.y < 0) {

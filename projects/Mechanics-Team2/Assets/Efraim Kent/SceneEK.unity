@@ -1794,7 +1794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flightSpeed: 20
-  dropSpeed: 2.5
+  dropSpeed: 10
 --- !u!114 &1286023283
 MonoBehaviour:
   m_ObjectHideFlags: 0
