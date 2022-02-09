@@ -1365,7 +1365,6 @@ GameObject:
   - component: {fileID: 1316935106}
   - component: {fileID: 1316935105}
   - component: {fileID: 1316935104}
-  - component: {fileID: 1316935111}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1387,7 +1386,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   runSpeed: 10
-  jumpForce: 500
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  jumpVelocity: 6
   rigidBody: {fileID: 1316935105}
   groundCheck: {fileID: 571160380}
   ground:
@@ -1489,21 +1490,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1316935111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1316935103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af076517b7faf4139b1e78795879c151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpVelocity: 5.83
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
 --- !u!1 &1448060252
 GameObject:
   m_ObjectHideFlags: 1

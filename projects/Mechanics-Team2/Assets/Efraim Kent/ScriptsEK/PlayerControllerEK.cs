@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
 
 public class PlayerControllerEK : MonoBehaviour {
 
-    [SerializeField] float moveSpeed = 5f, runSpeed = 10f, jumpForce = 500f;
+    [SerializeField] float moveSpeed = 5f, runSpeed = 10f, fallMultiplier = 2.5f, lowJumpMultiplier = 2f;
+    [SerializeField, Range(1, 10)] float jumpVelocity = 6;
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
@@ -39,11 +39,19 @@ public class PlayerControllerEK : MonoBehaviour {
             var jumpInput = Input.GetKeyDown(KeyCode.Space);
             //Preferably in Update()
 
-            //Apply jump force
-            if (jumpInput && IsGrounded())
-                rigidBody.AddForce(Vector3.up * jumpForce);
-                //Preferably interact with physics in FixedUpdate()
-                //since physics run at a fixed framerate anyway
+            //Apply jump velocity
+            if (jumpInput && IsGrounded()) {
+                rigidBody.velocity = Vector3.up * jumpVelocity;
+            }
+            //Preferably interact with physics in FixedUpdate()
+
+            //apply fallMultiplier to gravity
+            if (rigidBody.velocity.y < 0) {
+                rigidBody.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
+            } else if (rigidBody.velocity.y > 0 && !Input.GetButton("Jump")) {
+                rigidBody.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
+                //apply lowJumpMultiplier when not holding the jump button
+            }
     }
 
     bool IsGrounded() {
