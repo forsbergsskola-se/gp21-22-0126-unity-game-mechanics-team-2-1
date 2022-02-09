@@ -17,7 +17,7 @@ public class DashPad : MonoBehaviour
 
   
     
-    private void OnCollisionEnter(Collision hit)
+   private void OnCollisionEnter(Collision hit)
     {
 
         switch (hit.gameObject.tag)
@@ -25,10 +25,12 @@ public class DashPad : MonoBehaviour
             case "DashBoost":
                 _playerControllerSami.moveSpeed = 25f;
                 break;
-            case "Ground":
+           case "Ground":
                 _playerControllerSami.moveSpeed = currentMoveSpeed; 
                    break;
-        }
+       }
         
     }
+
 }
+   
