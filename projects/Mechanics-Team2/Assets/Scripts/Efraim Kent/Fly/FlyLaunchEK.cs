@@ -47,19 +47,21 @@ public class FlyLaunchEK : MonoBehaviour, IGrounded, IFly {
 
     void FlightMode(bool isGrounded) {
         if (!isGrounded) {
-            rigidBody.useGravity = false;
-            isFlying = true;
+            Flying(true);
         } else {
-            rigidBody.useGravity = true;
-            isFlying = false;
+         Grounded(true);
         }
     }
 
     public void Grounded(bool grounded) {
-        FlightMode(grounded);
+        rigidBody.useGravity = true;
+        isFlying = false;
+        Debug.Log("Grounded");
     }
 
     public void Flying(bool flying) {
-
+        rigidBody.useGravity = false;
+        isFlying = true;
+        Debug.Log("Flying");
     }
 }
