@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BetterJumpEK : MonoBehaviour {
+public class JumpEK : MonoBehaviour {
 
     [Range(1, 10)] public float jumpVelocity;
     [SerializeField] float fallMultiplier = 2.5f, lowJumpMultiplier = 2f;
