@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class DashPad : MonoBehaviour
 {
-    private PlayerControllerSami _playerControllerSami;
+    private PlayerControllerEK _playerController;
+    
     private float currentMoveSpeed;
     
     
-    // Start is called before the first frame update
+  
     void Start()
     {
-        _playerControllerSami = gameObject.GetComponent<PlayerControllerSami>();
-        currentMoveSpeed = _playerControllerSami.moveSpeed;
+        _playerController = gameObject.GetComponent<PlayerControllerEK>();
+        currentMoveSpeed = _playerController.moveSpeed;
     }
 
   
@@ -24,10 +25,10 @@ public class DashPad : MonoBehaviour
         switch (hit.gameObject.tag)
         {
             case "DashBoost":
-                _playerControllerSami.moveSpeed = 20f;
+                _playerController.moveSpeed = 20f;
                 break;
            case "Ground":
-                _playerControllerSami.moveSpeed = currentMoveSpeed; 
+               _playerController.moveSpeed = currentMoveSpeed; 
                    break;
        }
         

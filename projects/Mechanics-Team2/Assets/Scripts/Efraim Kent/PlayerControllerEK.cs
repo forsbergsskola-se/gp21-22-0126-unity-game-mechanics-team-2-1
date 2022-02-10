@@ -6,7 +6,7 @@ public interface IGrounded {
 
 public class PlayerControllerEK : MonoBehaviour, IFly {
 
-    [SerializeField] float moveSpeed = 5f, runSpeed = 10f, fallMultiplier = 2.5f, lowJumpMultiplier = 2f;
+    [SerializeField] public float moveSpeed = 5f, runSpeed = 10f, fallMultiplier = 2.5f, lowJumpMultiplier = 2f;
     [SerializeField, Range(1, 10)] float jumpVelocity = 6;
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] Transform groundCheck;
