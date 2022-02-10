@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8582913145161835527}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: -1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 8582913146946779976}
   - component: {fileID: 8582913146946779983}
   - component: {fileID: 8582913146946779982}
+  - component: {fileID: 849103578}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -310,8 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2dbcd636092444fb7d24f7aa97670c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  runSpeed: 10
+  moveSpeed: 6
+  runSpeed: 12
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   jumpVelocity: 6
@@ -335,6 +336,25 @@ MonoBehaviour:
   flightSpeed: 20
   dropSpeed: 10
   maxSpeed: 20
+--- !u!114 &849103578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582913146946779980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d738cd9462462491d8e5bdd57d7de2d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 8582913145161835520}
+  ground:
+    serializedVersion: 2
+    m_Bits: 8
+  myRigidbody: {fileID: 8582913146946779976}
+  dashingVelocity: 14
+  dashingTime: 0.5
 --- !u!1 &8582913146968278659
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8582913146968278659}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
