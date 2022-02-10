@@ -12,27 +12,39 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
 
+    bool toggle;
+
     void Awake() {
         rigidBody = GetComponent<Rigidbody>();
     }
 
     void LateUpdate() {
+        ToggleRun();
         Move();
         Jump();
+    }
+
+
+    void ToggleRun() {
+        var runInput = Input.GetAxis("Run");
+
+        if (runInput > 0) {
+            toggle = !toggle;
+            Debug.Log($"ToggleRun is {toggle}");
+        }
     }
 
     void Move() {
         //Get move input
         var moveInput = Input.GetAxis("Horizontal");
 
-        //avoid repeat direct access to vector
+        //avoid repeat direct access to velocity vector
         var velocity = rigidBody.velocity;
 
-        //Set run velocity
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D)) {
+        //toggle movement velocity
+        if (toggle) { //run
             velocity = new Vector3(moveInput * runSpeed, velocity.y, 0);
-        } else {
-            //Set walk velocity
+        } else { //walk
             velocity = new Vector3(moveInput * moveSpeed, velocity.y, 0);
         }
         rigidBody.velocity = velocity;
@@ -58,11 +70,14 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
 
     bool IsGrounded() {
         return Physics.CheckSphere(groundCheck.position, .1f, ground);
+        Debug.Log("Grounded");
     }
 
     public void Flying(bool flying) {
         if (!flying) {
             IsGrounded();
+        } else {
+            Debug.Log("Flying");
         }
     }
 }
