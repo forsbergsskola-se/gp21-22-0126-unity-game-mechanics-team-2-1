@@ -26,9 +26,8 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
 
 
     void ToggleRun() {
-        var runInput = Input.GetAxis("Run");
-
-        if (runInput > 0) {
+        var runInput = Input.GetKeyDown(KeyCode.R);
+        if (runInput) {
             toggle = !toggle;
             Debug.Log($"ToggleRun is {toggle}");
         }
@@ -70,14 +69,11 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
 
     bool IsGrounded() {
         return Physics.CheckSphere(groundCheck.position, .1f, ground);
-        Debug.Log("Grounded");
     }
 
     public void Flying(bool flying) {
         if (!flying) {
             IsGrounded();
-        } else {
-            Debug.Log("Flying");
         }
     }
 }
