@@ -20,7 +20,6 @@ public class FlyLaunchEK : MonoBehaviour, IGrounded, IFly {
 
     void LateUpdate() {
         Launch();
-
         FlightAcceleration();
     }
 
@@ -29,11 +28,11 @@ public class FlyLaunchEK : MonoBehaviour, IGrounded, IFly {
 
         if (!isFlying && currentVelocity < maxSpeed) return;
         if (Input.GetKey(KeyCode.W)) {
-            rigidBody.AddForce(Vector3.up * flightSpeed);
+            rigidBody.AddRelativeForce(Vector3.up * flightSpeed);
         }
 
         if (Input.GetKey(KeyCode.S)) {
-            rigidBody.AddForce(Vector3.down * dropSpeed);
+            rigidBody.AddRelativeForce(Vector3.down * dropSpeed);
         }
     }
 
