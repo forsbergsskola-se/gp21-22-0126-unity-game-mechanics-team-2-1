@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class FlyHooverEK : MonoBehaviour {
-    [SerializeField] float hooverDuration, hooverSpeed;
+    [SerializeField] float hooverDuration = 3f, hooverVelocity = 5f;
     GameObject player;
     Rigidbody playerRigidBody;
     bool isHovering;
@@ -16,7 +15,7 @@ public class FlyHooverEK : MonoBehaviour {
 
     void Update() {
         if (isHovering) {
-            Vector3 p = new Vector3(0, hooverSpeed * Time.deltaTime, 0);
+            Vector3 p = new Vector3(0, hooverVelocity * Time.deltaTime, 0);
             player.transform.position += p;
         }
     }
