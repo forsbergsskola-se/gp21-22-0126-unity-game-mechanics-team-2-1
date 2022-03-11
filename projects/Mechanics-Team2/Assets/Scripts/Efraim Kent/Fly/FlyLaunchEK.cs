@@ -3,64 +3,51 @@ using UnityEngine;
 public interface IFly {
     void Flying(bool flying);
 }
-
-public class FlyLaunchEK : MonoBehaviour, IGrounded, IFly {
+public class FlyLaunchEK : MonoBehaviour, IFly {
 
     [SerializeField] float flightSpeed = 20f, dropSpeed = 10f, maxSpeed = 30f;
-
-    GameObject player;
-    Rigidbody rigidBody;
+    Rigidbody playerRigidBody;
 
     bool isFlying;
 
     void Awake() {
-        rigidBody = GetComponent<Rigidbody>();
-        isFlying = false;
+        playerRigidBody = GetComponent<Rigidbody>();
     }
 
     void LateUpdate() {
-        Launch();
+        FlightMode();
         FlightAcceleration();
     }
 
     void FlightAcceleration() {
-        var currentVelocity = rigidBody.velocity.magnitude;
+        var currentVelocity = playerRigidBody.velocity.magnitude;
 
         if (!isFlying && currentVelocity < maxSpeed) return;
         if (Input.GetKey(KeyCode.W)) {
-            rigidBody.AddRelativeForce(Vector3.up * flightSpeed);
-        }
-
-        if (Input.GetKey(KeyCode.S)) {
-            rigidBody.AddRelativeForce(Vector3.down * dropSpeed);
+            playerRigidBody.AddForce(Vector3.up * flightSpeed);
+        } else if (Input.GetKey(KeyCode.S)) {
+            playerRigidBody.AddForce(Vector3.down * dropSpeed);
         }
     }
 
-    void Launch() {
+    void FlightMode() {
         if (Input.GetKeyDown(KeyCode.E) && !isFlying) {
-            FlightMode(false);
-        } else if (Input.GetKeyDown(KeyCode.E)) {
-            FlightMode(true);
-        }
-    }
-
-    void FlightMode(bool isGrounded) {
-        if (!isGrounded) {
             Flying(true);
-        } else {
-         Grounded(true);
+        } else if (Input.GetKeyDown(KeyCode.E)) {
+            Flying(false);
         }
-    }
-
-    public void Grounded(bool grounded) {
-        rigidBody.useGravity = true;
-        isFlying = false;
-        Debug.Log("Grounded");
     }
 
     public void Flying(bool flying) {
-        rigidBody.useGravity = false;
-        isFlying = true;
-        Debug.Log("Flying");
+        playerRigidBody.velocity = Vector3.zero;
+        if (flying) {
+            playerRigidBody.useGravity = false;
+            isFlying = true;
+            //Debug.Log("Flying is " + isFlying);
+        } else {
+            playerRigidBody.useGravity = true;
+            isFlying = false;
+            //Debug.Log("Flying is " + isFlying);
+        }
     }
 }
