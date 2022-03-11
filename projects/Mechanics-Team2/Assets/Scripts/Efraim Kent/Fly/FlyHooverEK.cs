@@ -22,7 +22,7 @@ public class FlyHooverEK : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Player")) {
-            Debug.Log(collision + " occured");
+            //Debug.Log(collision + " occured");
             StartCoroutine(Hoover(collision));
         }
     }
@@ -30,17 +30,17 @@ public class FlyHooverEK : MonoBehaviour {
     IEnumerator Hoover(Collision collision) {
 
         playerRigidBody.useGravity = false;
-        if (playerRigidBody.useGravity == false) {
-            Debug.Log("gravity is " + playerRigidBody.useGravity);
-        }
+        // if (playerRigidBody.useGravity == false) {
+        //     Debug.Log("gravity is " + playerRigidBody.useGravity);
+        // }
         isHovering = true;
 
         yield return new WaitForSeconds(hooverDuration);
 
         playerRigidBody.useGravity = true;
-        if (playerRigidBody.useGravity) {
-            Debug.Log("gravity is " + playerRigidBody.useGravity);
-        }
+        // if (playerRigidBody.useGravity) {
+        //     Debug.Log("gravity is " + playerRigidBody.useGravity);
+        // }
         isHovering = false;
     }
 }
