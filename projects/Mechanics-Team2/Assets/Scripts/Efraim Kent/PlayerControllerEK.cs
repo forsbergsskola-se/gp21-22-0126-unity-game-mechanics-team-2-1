@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public interface IGrounded {
-    void Grounded(bool grounded);
-}
-
-public class PlayerControllerEK : MonoBehaviour, IFly {
+public class PlayerControllerEK : MonoBehaviour, IFly
+{
 
     [SerializeField] public float moveSpeed = 5f, runSpeed = 10f, fallMultiplier = 2.5f, lowJumpMultiplier = 2f;
     [SerializeField, Range(1, 10)] float jumpVelocity = 6;
@@ -12,7 +9,8 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
 
-    bool toggle;
+    protected bool isFlying;
+    protected bool toggle;
 
     void Awake() {
         rigidBody = GetComponent<Rigidbody>();
@@ -24,9 +22,8 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
         Jump();
     }
 
-
     void ToggleRun() {
-        var runInput = Input.GetKeyDown(KeyCode.R);
+        var runInput = Input.GetKeyDown(KeyCode.LeftCommand);
         if (runInput) {
             toggle = !toggle;
             Debug.Log($"ToggleRun is {toggle}");
@@ -37,33 +34,29 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
         //Get move input
         var moveInput = Input.GetAxis("Horizontal");
 
-        //avoid repeat direct access to velocity vector
-        var velocity = rigidBody.velocity;
-
-        //toggle movement velocity
+        //toggle movement speed
         if (toggle) { //run
-            velocity = new Vector3(moveInput * runSpeed, velocity.y, 0);
+            rigidBody.velocity = new Vector3(moveInput * runSpeed, rigidBody.velocity.y, 0);
         } else { //walk
-            velocity = new Vector3(moveInput * moveSpeed, velocity.y, 0);
+            rigidBody.velocity = new Vector3(moveInput * moveSpeed, rigidBody.velocity.y, 0);
         }
-        rigidBody.velocity = velocity;
     }
 
     void Jump() {
             //Get jump input
-            var jumpInput = Input.GetKeyDown(KeyCode.Space);
+            var jump = Input.GetKey(KeyCode.Space);
 
             //Apply jump velocity
-            if (jumpInput && IsGrounded()) {
+            if (jump && IsGrounded() && !isFlying) {
                 rigidBody.velocity = Vector3.up * jumpVelocity;
             }
 
-            //apply fallMultiplier to gravity
-            if (rigidBody.velocity.y < 0) {
+            if (rigidBody.velocity.y < 0 && !isFlying) {
+                //apply fallMultiplier to gravity
                 rigidBody.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
-            } else if (rigidBody.velocity.y > 0 && !Input.GetButton("Jump")) {
-                rigidBody.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
+            } else if (rigidBody.velocity.y > 0 && !isFlying && !jump) {
                 //apply lowJumpMultiplier when not holding the jump button
+                rigidBody.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
             }
     }
 
@@ -72,8 +65,6 @@ public class PlayerControllerEK : MonoBehaviour, IFly {
     }
 
     public void Flying(bool flying) {
-        if (!flying) {
-            IsGrounded();
-        }
+        isFlying = flying;
     }
 }
