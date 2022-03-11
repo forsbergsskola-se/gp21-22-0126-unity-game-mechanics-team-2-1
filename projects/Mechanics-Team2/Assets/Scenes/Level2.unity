@@ -23940,14 +23940,6 @@ PrefabInstance:
       propertyPath: m_Lens.m_SensorSize.x
       value: 2.3993096
       objectReference: {fileID: 0}
-    - target: {fileID: 8582913146946779976, guid: efe03c6d00b934b5f9ff266e1e34f8dc, type: 3}
-      propertyPath: m_Drag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8582913146946779976, guid: efe03c6d00b934b5f9ff266e1e34f8dc, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8582913146946779980, guid: efe03c6d00b934b5f9ff266e1e34f8dc, type: 3}
       propertyPath: m_Name
       value: Player
